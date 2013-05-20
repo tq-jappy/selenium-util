@@ -19,7 +19,7 @@ class FirstExample {
     void "http://code.google.com/p/selenium/wiki/GettingStarted を動かしてみる"() {
         def driver = new HtmlUnitDriver()
 
-        driver.get("http://www.google.com")
+        driver.get("http://www.google.co.jp/")
 
         def element = driver.findElement(By.name("q"))
 
@@ -27,6 +27,6 @@ class FirstExample {
 
         element.submit()
 
-        System.out.println("Page title is: " + driver.getTitle())
+        assert driver.getTitle() == "Cheese! - Google 検索"
     }
 }

@@ -1,6 +1,7 @@
 apply plugin: "java"
 apply plugin: "maven"
 apply plugin: "eclipse"
+apply plugin: "groovy"
 
 group = "jappy"
 version = 1.0
@@ -21,5 +22,6 @@ repositories {
 
 dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.32.0'
+    testCompile 'org.codehaus.groovy:groovy-all:2.1.3'
     testCompile 'junit:junit:4.11'
 }
