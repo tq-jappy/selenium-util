@@ -14,6 +14,15 @@ def defaultEncoding = 'UTF-8'
     javadoc
 ]*.options*.encoding = defaultEncoding
 
+sourceSets {
+    test {
+        groovy {
+            srcDirs = ['src/test/groovy']
+            exclude 'FirstTest.groovy, SecondTest.groovy'
+        }
+    }
+}
+
 repositories {
     mavenLocal()
     maven { url "http://maven.seasar.org/maven2" }
