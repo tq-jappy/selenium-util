@@ -11,7 +11,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  *
  * @author t.endo
  */
-public class WebBrowser extends ExternalResource {
+public class WebDriverRule extends ExternalResource {
+
+    private static int count;
 
     private static WebDriver driver;
 
@@ -21,16 +23,16 @@ public class WebBrowser extends ExternalResource {
 
     @Override
     public void before() {
-        System.out.println("before");
-        if (driver == null) {
+        if (count == 0) {
             driver = new FirefoxDriver();
         }
+        count++;
     }
 
     @Override
     public void after() {
-        System.out.println("after");
-        if (driver != null) {
+        count--;
+        if (driver != null && count == 0) {
             driver.quit();
         }
     }

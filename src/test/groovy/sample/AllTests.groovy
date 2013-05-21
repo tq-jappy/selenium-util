@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Suite
 import org.junit.runners.Suite.SuiteClasses
 
-import sample.rule.WebBrowser
+import sample.rule.WebDriverRule
 
 
 /**
@@ -18,9 +18,9 @@ import sample.rule.WebBrowser
  * @author t.endo
  */
 @RunWith(Suite.class)
-@SuiteClasses([FirstTest.class, SecondTest.class])
-class SampleTestSuite {
+@SuiteClasses([FirstTest.class, SecondTest.class, NormalTest.class])
+class AllTests {
 
     @ClassRule
-    public static WebBrowser browser = new WebBrowser()
+    public static WebDriverRule browser = new WebDriverRule()
 }

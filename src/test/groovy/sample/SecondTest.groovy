@@ -9,7 +9,7 @@ import org.junit.ClassRule
 import org.junit.Test
 import org.openqa.selenium.By
 
-import sample.rule.WebBrowser
+import sample.rule.WebDriverRule
 
 /**
  *
@@ -17,7 +17,8 @@ import sample.rule.WebBrowser
  */
 class SecondTest {
 
-    public static WebBrowser browser = new WebBrowser()
+    @ClassRule
+    public static WebDriverRule browser = new WebDriverRule()
 
     @Test
     void "Chocolate! で Google 検索"() {

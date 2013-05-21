@@ -3,7 +3,7 @@ apply plugin: "maven"
 apply plugin: "eclipse"
 apply plugin: "groovy"
 
-group = "jappy"
+group = "endo"
 version = 1.0
 sourceCompatibility = 1.7
 
@@ -14,18 +14,8 @@ def defaultEncoding = 'UTF-8'
     javadoc
 ]*.options*.encoding = defaultEncoding
 
-sourceSets {
-    test {
-        groovy {
-            srcDirs = ['src/test/groovy']
-            exclude 'FirstTest.groovy, SecondTest.groovy'
-        }
-    }
-}
-
 repositories {
     mavenLocal()
-    maven { url "http://maven.seasar.org/maven2" }
     mavenCentral()
 }
 
@@ -34,3 +24,5 @@ dependencies {
     testCompile 'org.codehaus.groovy:groovy-all:2.1.3'
     testCompile 'junit:junit:4.11'
 }
+
+test { include '**/AllTests.*' }
