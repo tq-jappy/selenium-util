@@ -30,13 +30,14 @@ public final class SeleniumTestUtil {
         Class<?> pageClass = page.getClass();
 
         for (Field pageField : pageClass.getDeclaredFields()) {
+            // ページクラス側の WebElement を取り出す
             if (!pageField.getType().equals(WebElement.class)) {
                 continue;
             }
             pageField.setAccessible(true);
-
             WebElement element = (WebElement) pageField.get(page);
 
+            // 同じフィールド名をもつ FixtureClass 側の Object の値を取り出す
             Field fixtureField = null;
             try {
                 fixtureField = fixtureClass.getDeclaredField(pageField
@@ -45,15 +46,28 @@ public final class SeleniumTestUtil {
                 continue;
             }
             fixtureField.setAccessible(true);
-
             Object value = fixtureField.get(fixture);
+
             if (value == null) {
                 continue;
-            } else if (!(value instanceof String)) {
-                continue;
+            } else if (value instanceof String) {
+                sendString(element, (String) value);
+            } else if (value instanceof Boolean) {
+                sendBoolean(element, (Boolean) value);
             } else {
-                element.sendKeys((String) value);
+                throw new AssertionError("unsupported class: "
+                        + value.getClass().getName());
             }
+        }
+    }
+
+    private static void sendString(WebElement element, String value) {
+        element.sendKeys(value);
+    }
+
+    private static void sendBoolean(WebElement element, boolean selected) {
+        if (element.isSelected() != selected) {
+            element.click();
         }
     }
 
