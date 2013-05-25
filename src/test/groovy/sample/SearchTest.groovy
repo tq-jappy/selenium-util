@@ -1,6 +1,3 @@
-/**
- *
- */
 package sample;
 
 import static org.junit.Assert.*
@@ -9,20 +6,20 @@ import org.junit.ClassRule
 import org.junit.Test
 import org.openqa.selenium.By
 
-import sample.rule.WebDriverRule
+import sample.rules.WebDriverRule
 
 /**
  *
  * @author t.endo
  */
-class FirstTest {
+class SearchTest {
 
     @ClassRule
-    public static WebDriverRule browser = new WebDriverRule()
+    public static WebDriverRule webDriverRule = new WebDriverRule()
 
     @Test
     void "Cheese! で Google 検索"() {
-        def driver = browser.getDriver()
+        def driver = webDriverRule.getDriver()
         driver.get("http://www.google.co.jp/")
 
         def element = driver.findElement(By.name("q"))

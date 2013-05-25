@@ -1,7 +1,4 @@
-/**
- *
- */
-package sample.rule;
+package sample.rules;
 
 import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
