@@ -31,7 +31,7 @@ public class WebDriverRule extends ExternalResource {
     public void after() {
         count--;
         if (driver != null && count == 0) {
-            driver.quit();
+            // driver.quit();
         }
     }
 }

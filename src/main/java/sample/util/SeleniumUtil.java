@@ -3,6 +3,7 @@ package sample.util;
 import java.lang.reflect.Field;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import sample.fixtures.AbstractFixture;
 import sample.pages.AbstractPage;
@@ -11,7 +12,7 @@ import sample.pages.AbstractPage;
  *
  * @author t.endo
  */
-public final class SeleniumTestUtil {
+public final class SeleniumUtil {
 
     /**
      * fixture 内のプロパティの値を page 内の同名フィールドの WebElement に入力する。
@@ -47,30 +48,57 @@ public final class SeleniumTestUtil {
             }
             fixtureField.setAccessible(true);
             Object value = fixtureField.get(fixture);
-
             if (value == null) {
                 continue;
-            } else if (value instanceof String) {
-                sendString(element, (String) value);
-            } else if (value instanceof Boolean) {
-                sendBoolean(element, (Boolean) value);
+            }
+
+            if (isElementSelect(element)) {
+                if (value instanceof String) {
+                    selectValue(element, (String) value);
+                } else if (value instanceof Number) {
+                    selectValue(element, ((Number) value).toString());
+                } else {
+                    throw new AssertionError("unsupported class: "
+                            + value.getClass().getName());
+                }
             } else {
-                throw new AssertionError("unsupported class: "
-                        + value.getClass().getName());
+                if (value instanceof String) {
+                    inputString(element, (String) value);
+                } else if (value instanceof Number) {
+                    inputNumber(element, (Number) value);
+                } else if (value instanceof Boolean) {
+                    checkBoolean(element, (Boolean) value);
+                } else {
+                    throw new AssertionError("unsupported class: "
+                            + value.getClass().getName());
+                }
             }
         }
     }
 
-    private static void sendString(WebElement element, String value) {
+    private static void inputString(WebElement element, String value) {
         element.sendKeys(value);
     }
 
-    private static void sendBoolean(WebElement element, boolean selected) {
+    private static void inputNumber(WebElement element, Number number) {
+        element.sendKeys(number.toString());
+    }
+
+    private static void checkBoolean(WebElement element, boolean selected) {
         if (element.isSelected() != selected) {
             element.click();
         }
     }
 
-    private SeleniumTestUtil() {
+    private static void selectValue(WebElement element, String value) {
+        Select select = new Select(element);
+        select.selectByValue(value);
+    }
+
+    private static boolean isElementSelect(WebElement element) {
+        return element.getTagName().equalsIgnoreCase("select");
+    }
+
+    private SeleniumUtil() {
     }
 }

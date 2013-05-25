@@ -1,7 +1,7 @@
 package sample.pages;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
-import static sample.util.SeleniumTestUtil.*;
+import static sample.util.SeleniumUtil.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
