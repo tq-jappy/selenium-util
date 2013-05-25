@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import sample.fixtures.SearchFixture;
@@ -18,17 +17,14 @@ import sample.fixtures.SearchFixture;
  *
  * @author t.endo
  */
-public class SearchPage {
-
-    private WebDriver driver;
+public class SearchPage extends AbstractPage {
 
     @FindBy(how = How.NAME, name = "q")
     @CacheLookup
     private WebElement q;
 
     public SearchPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public SearchPage open() {

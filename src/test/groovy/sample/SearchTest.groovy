@@ -43,7 +43,7 @@ class SearchTest {
 
         def searchResultPage = searchPage.open().type("Cheese!").submit();
 
-        assert driver.getTitle() == "cheese! - Google 検索"
+        assert searchResultPage.title == "cheese! - Google 検索"
     }
 
     @Test
@@ -54,6 +54,6 @@ class SearchTest {
         def fixture = new SearchFixture("Cheese!");
         def searchResultPage = searchPage.open().type(fixture).submit();
 
-        assert driver.getTitle() == "cheese! - Google 検索"
+        assert searchResultPage.title == "cheese! - Google 検索"
     }
 }

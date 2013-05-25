@@ -4,7 +4,7 @@ package sample.fixtures;
  *
  * @author t.endo
  */
-public class SearchFixture {
+public class SearchFixture extends AbstractFixture {
 
     private String q;
 

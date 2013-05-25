@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import org.openqa.selenium.WebElement;
 
-import sample.fixtures.SearchFixture;
-import sample.pages.SearchPage;
+import sample.fixtures.AbstractFixture;
+import sample.pages.AbstractPage;
 
 /**
  *
@@ -23,7 +23,7 @@ public final class SeleniumTestUtil {
      * @throws IllegalAccessException
      * @throws NoSuchFieldException
      */
-    public static void sendProperties(SearchFixture fixture, SearchPage page)
+    public static void sendProperties(AbstractFixture fixture, AbstractPage page)
             throws IllegalAccessException, NoSuchFieldException {
 
         Class<?> fixtureClass = fixture.getClass();
