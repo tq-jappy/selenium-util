@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
+ * Selenium Webdriver を使ったテストを行うためのブラウザの起動・停止を行うルール。
  *
  * @author t.endo
  */

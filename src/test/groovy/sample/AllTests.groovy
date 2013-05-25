@@ -15,7 +15,7 @@ import sample.rules.WebDriverRule
  * @author t.endo
  */
 @RunWith(Suite)
-@SuiteClasses([SearchTest.class, SearchUsingPageObjectPatternTest.class, NormalTest.class])
+@SuiteClasses([SearchTest.class, NormalTest.class])
 class AllTests {
 
     @ClassRule

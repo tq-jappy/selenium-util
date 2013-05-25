@@ -1,11 +1,18 @@
 package sample.pages;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static sample.util.SeleniumTestUtil.*;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import sample.fixtures.SearchFixture;
 
 /**
  *
@@ -34,8 +41,16 @@ public class SearchPage {
         return this;
     }
 
+    public SearchPage type(SearchFixture fixture) throws Exception {
+        sendProperties(fixture, this);
+        return this;
+    }
+
     public SearchResultPage submit() {
         q.submit();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(presenceOfElementLocated(By.id("resultStats")));
 
         return new SearchResultPage(driver);
     }
